@@ -60,4 +60,36 @@ public class ListaLEG<E extends Comida> {
             }
         }
     }
+    /*public void agregarNuevoUsuario(E x){
+        NodoLEG<E> nuevo=new NodoLEG<>(x);
+        
+        NodoLEG<E> ant=null,aux=primero;
+        
+        if(primero==null){
+            insertarAlInicio(x);
+        }else{
+            
+        while(aux!=null && 
+         aux.getDato().getNom_afiliado().compareToIgnoreCase(x.getNom_afiliado())<0){
+                ant=aux;
+                aux=aux.getSiguiente();
+        }
+        if(aux!=null){
+            if(aux.getDato().getNom_afiliado().equalsIgnoreCase(x.getNom_afiliado())){
+                JOptionPane.showMessageDialog(null, "Usuario ya existe ......");
+            }else{
+                if(aux==primero){
+                    insertarAlInicio(x);
+                }else {//insercion entre dos nodos
+                    ant.setSiguiente(nuevo);
+                    nuevo.setSiguiente(aux);
+                    talla++;
+                }
+            }
+        }else{
+            insertarAlFinal(x);
+        }
+        
+    }    
+    }*/
 }
