@@ -2,7 +2,7 @@ package misClases;
 
 import misInterfaces.*;
 
-public class ArrayCola<E> implements Cola<E>{
+public class ArrayCola<E extends Pedidos> implements Cola<E>{
     protected static final int TAMAÑO = 50;
     protected E[] arC;
     protected int frentec, finalc;
@@ -12,11 +12,7 @@ public class ArrayCola<E> implements Cola<E>{
         this.frentec = -1;
         this.finalc = -1;
     }
-    public void prueba(Object x){
-        if (x instanceof String){
-            
-        }
-    }
+
     @Override
     public void encolar(E x){
         if (colaLlena()){
