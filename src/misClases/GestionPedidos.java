@@ -6,6 +6,7 @@ public class GestionPedidos {
     public GestionPedidos() {
         cola = new ArrayCola<>();
     }
+    
     public ArrayCola<Pedidos> getCola() {
         return cola;
     }
