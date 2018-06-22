@@ -34,5 +34,8 @@ public class Pedidos {
     public void setLista(ListaLEG lista) {
         this.lista = lista;
     }
-    
+    public String toString(){
+        return"La sucursal es:"+sucursal+
+                "El monto es:"+montoR;
+    }
 }
