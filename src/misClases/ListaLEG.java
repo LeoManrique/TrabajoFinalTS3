@@ -1,5 +1,8 @@
 package misClases;
 
+import java.util.Random;
+import javax.swing.JOptionPane;
+
 public class ListaLEG<E extends Comida> {
     private NodoLEG<E> primero;
     private int talla;
@@ -15,6 +18,7 @@ public class ListaLEG<E extends Comida> {
     public int getTalla(){
         return talla;
     }
+    
     public void insertarAlInicio(E x){
         NodoLEG<E> nuevo = new NodoLEG<>(x);
         nuevo.setSiguiente(primero);
@@ -60,7 +64,24 @@ public class ListaLEG<E extends Comida> {
             }
         }
     }
-    /*public void agregarNuevoUsuario(E x){
+    
+    public void eliminarDatoAleatorio(){
+        Random randito = new Random();
+        int indice = randito.nextInt(talla);  //desde 0 hasta talla-1
+        int contador = 0;
+        NodoLEG<E> nodo = primero;
+        while (nodo != null){
+            if (contador == indice){
+                eliminarDato(nodo.getDato());
+                break;
+            } else {
+                nodo = nodo.getSiguiente();
+                contador++;
+            }
+        }
+    }
+    
+    public void agregarNuevaComida(E x){
         NodoLEG<E> nuevo=new NodoLEG<>(x);
         
         NodoLEG<E> ant=null,aux=primero;
@@ -70,13 +91,13 @@ public class ListaLEG<E extends Comida> {
         }else{
             
         while(aux!=null && 
-         aux.getDato().getNom_afiliado().compareToIgnoreCase(x.getNom_afiliado())<0){
+         aux.getDato().getNombre().compareToIgnoreCase(x.getNombre())<0){
                 ant=aux;
                 aux=aux.getSiguiente();
         }
         if(aux!=null){
-            if(aux.getDato().getNom_afiliado().equalsIgnoreCase(x.getNom_afiliado())){
-                JOptionPane.showMessageDialog(null, "Usuario ya existe ......");
+            if(aux.getDato().getNombre().equalsIgnoreCase(x.getNombre())){
+                JOptionPane.showMessageDialog(null, "La comida ya existe ......");
             }else{
                 if(aux==primero){
                     insertarAlInicio(x);
@@ -91,5 +112,5 @@ public class ListaLEG<E extends Comida> {
         }
         
     }    
-    }*/
+    }
 }

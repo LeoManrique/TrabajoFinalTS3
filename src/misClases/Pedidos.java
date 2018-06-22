@@ -3,7 +3,7 @@ package misClases;
 public class Pedidos {
     private int sucursal;
     private double montoR;
-    private ListaLEG lista;
+    private ListaLEG<Comida> lista;
 
     public Pedidos(int sucursal, double montoR, ListaLEG lista) {
         this.sucursal = sucursal;
