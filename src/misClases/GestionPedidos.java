@@ -33,4 +33,21 @@ public class GestionPedidos <E extends Pedidos> {
         }
     }
     
+    public void eliminarFinalCola(){
+        ArrayCola<E> colaAux = new ArrayCola<>(); 
+        E pedido;
+        while (!cola.colaVacia()){
+            pedido = cola.frentec();
+            cola.desencolar();
+            if (!cola.colaVacia()){
+                colaAux.encolar(pedido);
+            }
+        }
+        while (!cola.colaVacia()){
+            pedido = cola.frentec();
+            colaAux.desencolar();
+            cola.encolar(pedido);
+        }
+    }
+    
 }
