@@ -1,6 +1,7 @@
 package misventana;
 
 import java.awt.Container;
+import javax.swing.table.DefaultTableModel;
 import miConexion.Conexion;
 import misClases.GestionPedidos;
 
@@ -8,15 +9,18 @@ import misClases.GestionPedidos;
 
 public class MiFormulario extends javax.swing.JFrame {
     
+    DefaultTableModel modelo;
+    
     public MiFormulario() {
         initComponents();    
         setLocationRelativeTo(this);
         GestionPedidos gestion = new GestionPedidos();
         Conexion conexion = new Conexion();
         conexion.conexion();
-        
-        
+        String titulo[] = {"Sucursal","Monto Recaudado"};
+        modelo = new DefaultTableModel(null,titulo);
            
+        jTableListadoPedidos.setModel(modelo);         
     }
 
     /**
@@ -65,15 +69,15 @@ public class MiFormulario extends javax.swing.JFrame {
 
         jTableListadoPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {},
+                {},
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Sucursal", "Monto Recaudado"
+
             }
         ));
         jScrollPane2.setViewportView(jTableListadoPedidos);
@@ -117,7 +121,7 @@ public class MiFormulario extends javax.swing.JFrame {
         });
 
         jPanel5.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro Pedidos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 14))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("")), "Registro Pedidos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 14))); // NOI18N
 
         jLabel4.setText("Sucursal:");
 
@@ -340,7 +344,7 @@ public class MiFormulario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonVerPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerPedidosActionPerformed
-       
+           
     }//GEN-LAST:event_jButtonVerPedidosActionPerformed
 
     private void jButtonComidaMayorMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComidaMayorMontoActionPerformed
