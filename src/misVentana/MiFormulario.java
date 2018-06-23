@@ -1,14 +1,15 @@
 package misventana;
 
+import misClases.GestionPedidos;
+
 
 
 public class MiFormulario extends javax.swing.JFrame {
     
     public MiFormulario() {
+        GestionPedidos gestion = new GestionPedidos();
         initComponents();    
-        
         setLocationRelativeTo(this);
-        
     }
 
     /**

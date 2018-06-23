@@ -1,5 +1,7 @@
 package misClases;
 
+import miLista.ListaLEG;
+
 public class Pedidos {
     private int sucursal;
     private double montoR;

@@ -1,7 +1,8 @@
-package misClases;
+package miLista;
 
 import java.util.Random;
 import javax.swing.JOptionPane;
+import misClases.Comida;
 
 public class ListaLEG<E extends Comida> {
     private NodoLEG<E> primero;
