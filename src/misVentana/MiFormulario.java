@@ -1,5 +1,6 @@
 package misventana;
 
+import miConexion.Conexion;
 import misClases.GestionPedidos;
 
 
@@ -7,9 +8,11 @@ import misClases.GestionPedidos;
 public class MiFormulario extends javax.swing.JFrame {
     
     public MiFormulario() {
-        GestionPedidos gestion = new GestionPedidos();
         initComponents();    
         setLocationRelativeTo(this);
+        GestionPedidos gestion = new GestionPedidos();
+        Conexion conexion = new Conexion();
+        conexion.conexion();
     }
 
     /**
