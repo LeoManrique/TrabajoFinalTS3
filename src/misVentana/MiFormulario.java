@@ -314,12 +314,7 @@ public class MiFormulario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAgregarCActionPerformed
 
     private void jButtonVerPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerPedidosActionPerformed
-        
-    
-        
-        
-        
-        
+       
     }//GEN-LAST:event_jButtonVerPedidosActionPerformed
 
     private void jButtonComidaMayorMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComidaMayorMontoActionPerformed
