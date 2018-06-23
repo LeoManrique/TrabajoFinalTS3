@@ -2,7 +2,7 @@ package misClases;
 
 import miLista.ListaLEG;
 
-public class Pedidos {
+public class Pedidos extends Object {
     private int sucursal;
     private double montoR;
     private ListaLEG<Comida> lista;

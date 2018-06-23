@@ -9,7 +9,7 @@ public class ArrayCola<E extends Pedidos> implements Cola<E>{
     protected int frentec, finalc;
 
     public ArrayCola() {
-        this.arC = (E[]) new Object[TAMAÑO];
+        this.arC = (E[]) new Pedidos[TAMAÑO];
         this.frentec = -1;
         this.finalc = -1;
     }
