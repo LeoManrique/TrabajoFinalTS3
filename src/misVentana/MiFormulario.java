@@ -44,7 +44,7 @@ public class MiFormulario extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListadoPedidos = new javax.swing.JTable();
         jButtonVerPedidos = new javax.swing.JButton();
-        jButtonMontoRecaudadoTotal = new javax.swing.JButton();
+        jButtonComidaMayorMonto = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -190,7 +190,7 @@ public class MiFormulario extends javax.swing.JFrame {
                     .addComponent(jButtonEliminarComida, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButtonBuscarComida, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -220,7 +220,12 @@ public class MiFormulario extends javax.swing.JFrame {
             }
         });
 
-        jButtonMontoRecaudadoTotal.setText("Monto Reacudado Total");
+        jButtonComidaMayorMonto.setText("Comida con mayor monto");
+        jButtonComidaMayorMonto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonComidaMayorMontoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -232,11 +237,11 @@ public class MiFormulario extends javax.swing.JFrame {
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(88, 88, 88)
-                        .addComponent(jButtonMontoRecaudadoTotal))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(110, 110, 110)
-                        .addComponent(jButtonVerPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonVerPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jButtonComidaMayorMonto)))
                 .addContainerGap(19, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -244,9 +249,9 @@ public class MiFormulario extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(4, 4, 4)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(jButtonMontoRecaudadoTotal)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonComidaMayorMonto)
+                .addGap(37, 37, 37)
                 .addComponent(jButtonVerPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -280,7 +285,7 @@ public class MiFormulario extends javax.swing.JFrame {
                         .addContainerGap())
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonSalir)
                         .addGap(34, 34, 34))))
         );
@@ -317,6 +322,10 @@ public class MiFormulario extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jButtonVerPedidosActionPerformed
+
+    private void jButtonComidaMayorMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComidaMayorMontoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonComidaMayorMontoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,9 +367,9 @@ public class MiFormulario extends javax.swing.JFrame {
     private javax.swing.JButton jButtonAgregarC;
     private javax.swing.JButton jButtonAgregarPedido;
     private javax.swing.JButton jButtonBuscarComida;
+    private javax.swing.JButton jButtonComidaMayorMonto;
     private javax.swing.JButton jButtonEliminarComida;
     private javax.swing.JButton jButtonEliminarPedidos;
-    private javax.swing.JButton jButtonMontoRecaudadoTotal;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JButton jButtonVerPedidos;
     private javax.swing.JLabel jLabel2;
