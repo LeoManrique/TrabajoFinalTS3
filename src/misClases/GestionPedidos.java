@@ -1,5 +1,6 @@
 package misClases;
 
+import miCola.ArrayCola;
 import java.util.ArrayList;
 
 public class GestionPedidos <E extends Pedidos> {

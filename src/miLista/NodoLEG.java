@@ -1,4 +1,6 @@
-package misClases;
+package miLista;
+
+import misClases.Comida;
 
 public class NodoLEG<E extends Comida> {
     private E dato;

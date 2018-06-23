@@ -1,7 +1,8 @@
-package misClases;
+package miLista;
 
 import java.util.Random;
 import javax.swing.JOptionPane;
+import misClases.Comida;
 
 public class ListaLEG<E extends Comida> {
     private NodoLEG<E> primero;
@@ -111,6 +112,20 @@ public class ListaLEG<E extends Comida> {
             insertarAlFinal(x);
         }
         
-    }    
+        
+        }    
+    }
+    public E getComidaMayorMonto(){
+        NodoLEG<E> nodo = primero;
+        double monto_maximo = 0;
+        E comida_maxima = null;
+        while (nodo != null){
+            if (nodo.getDato().getMontoAPagar() > monto_maximo){
+                monto_maximo = nodo.getDato().getMontoAPagar();
+                comida_maxima = nodo.getDato();
+            }
+            nodo = nodo.getSiguiente();
+        }
+        return comida_maxima;
     }
 }

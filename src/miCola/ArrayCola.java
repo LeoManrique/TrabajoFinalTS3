@@ -1,6 +1,7 @@
-package misClases;
+package miCola;
 
-import misInterfaces.*;
+import miCola.Cola;
+import misClases.Pedidos;
 
 public class ArrayCola<E extends Pedidos> implements Cola<E>{
     protected static final int TAMAÑO = 50;
