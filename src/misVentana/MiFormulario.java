@@ -17,10 +17,13 @@ public class MiFormulario extends javax.swing.JFrame {
         GestionPedidos gestion = new GestionPedidos();
         Conexion conexion = new Conexion();
         conexion.conexion();
-        String titulo[] = {"Sucursal","Monto Recaudado"};
-        modelo = new DefaultTableModel(null,titulo);
-           
-        jTableListadoPedidos.setModel(modelo);         
+        String tituloP[] = {"Sucursal","Monto Recaudado"},
+               tituloC[] = {"Sucursal","Comida","Cantidad","Precio"};
+        modelo = new DefaultTableModel(null,tituloP);
+        jTableListadoPedidos.setModel(modelo);
+        modelo = new DefaultTableModel(null,tituloC);
+        jTableListadoComidas.setModel(modelo);
+        
     }
 
     /**
@@ -233,23 +236,15 @@ public class MiFormulario extends javax.swing.JFrame {
 
         jTableListadoComidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String [] {
-                "Sucursal", "Comida", "Cantidad", "Precio"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, true
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
             }
-        });
+        ));
         jScrollPane1.setViewportView(jTableListadoComidas);
 
         jButtonComidaMayorMonto.setText("Comida con mayor monto");
