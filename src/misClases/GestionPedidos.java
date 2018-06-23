@@ -17,13 +17,20 @@ public class GestionPedidos <E extends Pedidos> {
     }
     
     public void atenderSucursalesPares(){
-        ArrayCola<E> colaAux = new ArrayCola<>();
-        E pedido = cola.frentec();
-        int sucursal;
-        do {            
-            sucursal = pedido.getSucursal();
-            
-        } while (true);
+        ArrayCola<E> colaAux = new ArrayCola<>(); 
+        E pedido;
+        while (!cola.colaVacia()){
+            pedido = cola.frentec();
+            cola.desencolar();
+            if (pedido.getSucursal()%2==0){
+                colaAux.encolar(pedido);
+            }
+        }
+        while (!cola.colaVacia()){
+            pedido = cola.frentec();
+            colaAux.desencolar();
+            cola.encolar(pedido);
+        }
     }
     
 }
