@@ -1,16 +1,17 @@
 package misClases;
 
 import miLista.ListaLEG;
+import miLista.NodoLEG;
 
-public class Pedidos extends Object {
+public class Pedido extends Object {
     private int sucursal;
     private double montoR;
     private ListaLEG<Comida> lista;
 
-    public Pedidos(int sucursal, double montoR, ListaLEG lista) {
+    public Pedido(int sucursal) {
         this.sucursal = sucursal;
-        this.montoR = montoR;
-        this.lista = lista;
+        this.montoR = 0;
+        this.lista = new ListaLEG<>();
     }
 
     public int getSucursal() {
@@ -25,8 +26,16 @@ public class Pedidos extends Object {
         return montoR;
     }
 
-    public void setMontoR(double montoR) {
-        this.montoR = montoR;
+    public void generarMontoR() {
+        double monto = 0;
+        if (lista.getTalla() > 0){
+            NodoLEG<Comida> comida = lista.getPrimero();
+            do{
+                montoR+= comida.getDato().getMontoAPagar();
+                comida = comida.getSiguiente();
+            } while (comida.getSiguiente() != null);
+            this.montoR = monto;
+        }
     }
 
     public ListaLEG getLista() {

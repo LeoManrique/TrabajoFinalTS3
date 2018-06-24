@@ -1,15 +1,15 @@
 package miCola;
 
 import miCola.Cola;
-import misClases.Pedidos;
+import misClases.Pedido;
 
-public class ArrayCola<E extends Pedidos> implements Cola<E>{
+public class ArrayCola<E extends Pedido> implements Cola<E>{
     protected static final int TAMAÑO = 50;
     protected E[] arC;
     protected int frentec, finalc;
 
     public ArrayCola() {
-        this.arC = (E[]) new Pedidos[TAMAÑO];
+        this.arC = (E[]) new Pedido[TAMAÑO];
         this.frentec = -1;
         this.finalc = -1;
     }

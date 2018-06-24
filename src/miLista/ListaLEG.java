@@ -3,7 +3,7 @@ package miLista;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import misClases.Comida;
-import misClases.Pedidos;
+import misClases.Pedido;
 
 public class ListaLEG<E extends Comida> {
     private NodoLEG<E> primero;

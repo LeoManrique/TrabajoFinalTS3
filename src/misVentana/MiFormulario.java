@@ -12,6 +12,7 @@ import miConexion.Conexion;
 import miLista.ListaLEG;
 import misClases.Comida;
 import misClases.GestionPedidos;
+import misClases.Pedido;
 
 
 
@@ -23,7 +24,7 @@ public final class MiFormulario extends javax.swing.JFrame {
     public MiFormulario() {
         initComponents();    
         
-        listaCom = new ListaLEG<Comida>();
+        //listaCom = new ListaLEG<Comida>();
         
         
         setLocationRelativeTo(this);
@@ -50,10 +51,13 @@ public final class MiFormulario extends javax.swing.JFrame {
                 registros[0]=rs.getString("sucursal");
                 registros[1]=rs.getString("montor");
                 modelo.addRow(registros);
+                Pedido pedido = new Pedido(Integer.parseInt(registros[0]));
+                pedido.getMontoR();
+                gestion.encolarPedido();
             }
             jTableListadoPedidos.setModel(modelo);           
         } catch (SQLException e) {
-            System.out.println("Error ...."+e.toString());       
+            System.out.println("Error ...."+e.getMessage());       
         }         
     }
     public void CargarComidas(){
@@ -79,7 +83,7 @@ public final class MiFormulario extends javax.swing.JFrame {
             }
             jTableListadoComidas.setModel(modelo);           
         } catch (SQLException e) {
-            System.out.println("Error ...."+e.toString());       
+            System.out.println("Error ...."+e.getMessage());       
         }         
     }
 
@@ -413,24 +417,23 @@ public final class MiFormulario extends javax.swing.JFrame {
        Connection reg = cn.conexion();       
        String sql;      
        
-       int suc = Integer.parseInt(jTextFieldSucursalPedido.getText());
-       if(gestion.validarRepetido(suc)){
+       Pedido pedido = new Pedido(Integer.parseInt(jTextFieldSucursalPedido.getText()));
+       
+        try {
+            gestion.encolarPedido(pedido);
             sql="insert into pedidos (sucursal,montor) Values (?,0)";
-             try {
-                 PreparedStatement pst = reg.prepareStatement(sql);
-                 pst.setInt(1, suc);
+            PreparedStatement pst = reg.prepareStatement(sql);
+            pst.setInt(1, pedido.getSucursal());
 
-                 int n = pst.executeUpdate();
-                 if(n!=0){
-                     JOptionPane.showMessageDialog(this, "Valores cargados .......");
-                 }
-                 CargarPedidos();            
-             } catch (SQLException e) {
-                 System.out.println("Error encontrado  "+e.toString());
-             }
-       }else{
-           JOptionPane.showMessageDialog(null,"La sucursal ya existe ... ");
-       }
+            int n = pst.executeUpdate();
+            if(n!=0){
+                JOptionPane.showMessageDialog(this, "Valores cargados .......");
+            }
+            CargarPedidos();   
+        } catch (SQLException e) {
+            System.out.println("Error encontrado  "+e.getMessage());
+        }
+
     }//GEN-LAST:event_jButtonAgregarPedidoActionPerformed
 
     private void jButtonAgregarComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarComidaActionPerformed
@@ -458,7 +461,7 @@ public final class MiFormulario extends javax.swing.JFrame {
             }
             CargarComidas();            
         } catch (SQLException e) {
-            System.out.println("Error encontrado  "+e.toString());
+            System.out.println("Error encontrado  "+e.getMessage());
         }
     }//GEN-LAST:event_jButtonAgregarComidaActionPerformed
 

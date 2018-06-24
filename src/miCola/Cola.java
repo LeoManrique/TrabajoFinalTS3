@@ -1,8 +1,8 @@
 package miCola;
 
-import misClases.Pedidos;
+import misClases.Pedido;
 
-public interface Cola<E extends Pedidos> {
+public interface Cola<E extends Pedido> {
     void encolar(E x);
     void desencolar();
     E frentec();

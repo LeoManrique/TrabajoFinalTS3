@@ -3,7 +3,7 @@ package misClases;
 import miCola.ArrayCola;
 import java.util.ArrayList;
 
-public class GestionPedidos <E extends Pedidos> {
+public class GestionPedidos <E extends Pedido> {
     private ArrayCola<E> cola;
     
     public GestionPedidos() {
