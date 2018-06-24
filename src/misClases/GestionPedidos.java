@@ -17,21 +17,24 @@ public class GestionPedidos <E extends Pedido> {
         ArrayCola<E> colaAux = new ArrayCola<>(); 
         E pedido;
         boolean repetido = false;
-        while (!cola.colaVacia()){
-            pedido = cola.frentec();
-            
-            if (pedido.getSucursal() == sucursal){
-                repetido = true;
+        if (!cola.colaVacia()){
+            while (!cola.colaVacia()){
+                pedido = cola.frentec();
+
+                if (pedido.getSucursal() == sucursal){
+                    repetido = true;
+                }
+
+                cola.desencolar();
+                colaAux.encolar(pedido);
             }
-            
-            cola.desencolar();
-            colaAux.encolar(pedido);
+            while (!colaAux.colaVacia()){
+                pedido = colaAux.frentec();
+                colaAux.desencolar();
+                cola.encolar(pedido);
+            }
         }
-        while (!colaAux.colaVacia()){
-            pedido = cola.frentec();
-            colaAux.desencolar();
-            cola.encolar(pedido);
-        }
+
         return repetido;
     }
     public void encolarPedido(E x){
@@ -54,7 +57,7 @@ public class GestionPedidos <E extends Pedido> {
             }
         }
         while (!colaAux.colaVacia()){
-            pedido = cola.frentec();
+            pedido = colaAux.frentec();
             colaAux.desencolar();
             cola.encolar(pedido);
         }
@@ -71,7 +74,7 @@ public class GestionPedidos <E extends Pedido> {
             }
         }
         while (!colaAux.colaVacia()){
-            pedido = cola.frentec();
+            pedido = colaAux.frentec();
             colaAux.desencolar();
             cola.encolar(pedido);
         }
@@ -90,7 +93,7 @@ public class GestionPedidos <E extends Pedido> {
             }
         }
         while (!colaAux.colaVacia()){
-            pedido = cola.frentec();
+            pedido = colaAux.frentec();
             colaAux.desencolar();
             cola.encolar(pedido);
         }
@@ -107,7 +110,7 @@ public class GestionPedidos <E extends Pedido> {
             }
         }
         while (!colaAux.colaVacia()){
-            pedido = cola.frentec();
+            pedido = colaAux.frentec();
             colaAux.desencolar();
             cola.encolar(pedido);
         }
@@ -122,9 +125,26 @@ public class GestionPedidos <E extends Pedido> {
             colaAux.encolar(pedido);
         }
         while (!colaAux.colaVacia()){
-            pedido = cola.frentec();
+            pedido = colaAux.frentec();
             colaAux.desencolar();
             cola.encolar(pedido);
         }
+    }
+    public String toString(){
+        String res = "";
+        ArrayCola<E> colaAux = new ArrayCola<>(); 
+        E pedido;
+        while (!cola.colaVacia()){
+            pedido = cola.frentec();
+            cola.desencolar();
+            colaAux.encolar(pedido);
+            res+=pedido.toString();
+        }
+        while (!colaAux.colaVacia()){
+            pedido = colaAux.frentec();
+            colaAux.desencolar();
+            cola.encolar(pedido);
+        }
+        return res;
     }
 }

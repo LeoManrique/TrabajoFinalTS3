@@ -30,7 +30,7 @@ public final class MiFormulario extends javax.swing.JFrame {
         setLocationRelativeTo(this);
         gestion = new GestionPedidos();
         CargarPedidos();
-        CargarComidas();
+        gestion.toString();
         
     }
     public void CargarPedidos(){
@@ -55,6 +55,7 @@ public final class MiFormulario extends javax.swing.JFrame {
                 pedido.calcularMontoR();
                 gestion.encolarPedido(pedido);
             }
+            CargarComidas();
             jTableListadoPedidos.setModel(modelo);           
         } catch (SQLException e) {
             System.out.println("Error ...."+e.getMessage());       
@@ -80,7 +81,11 @@ public final class MiFormulario extends javax.swing.JFrame {
                 registros[2]=rs.getString("cantidad");
                 registros[3]=rs.getString("precio");
                 modelo.addRow(registros);
+                gestion.getPedido(Integer.parseInt(registros[0])).getLista().agregarNuevaComida(
+                        new Comida(registros[1], Double.parseDouble(registros[2]), Integer.parseInt(registros[3]))
+                );
             }
+            gestion.actualizarMontosPedidos();
             jTableListadoComidas.setModel(modelo);           
         } catch (SQLException e) {
             System.out.println("Error ...."+e.getMessage());       

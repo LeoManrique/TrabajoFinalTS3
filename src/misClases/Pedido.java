@@ -46,7 +46,8 @@ public class Pedido extends Object {
         this.lista = lista;
     }
     public String toString(){
-        return"La sucursal es:"+sucursal+
-                "El monto es:"+montoR;
+        String output = "La sucursal:"+sucursal+", con monto :"+montoR+"tiene las comidas:\n";
+        output+= getLista().toString();
+        return output;
     }
 }

@@ -41,14 +41,7 @@ public class ListaLEG<E extends Comida> {
         }
         talla++;
     }
-    public String toString(){
-        String res = "";
-        
-        for (NodoLEG<E> aux = primero; aux != null; aux = aux.getSiguiente()){
-            res = res + (aux.getDato().toString()) + "\n";
-        }
-        return res;
-    }
+
     public void eliminarDato(E x){
         NodoLEG<E> aux = primero, ant = null;
         
@@ -128,5 +121,14 @@ public class ListaLEG<E extends Comida> {
             nodo = nodo.getSiguiente();
         }
         return comida_maxima;
+    }
+    
+    public String toString(){
+        String res = "";
+        
+        for (NodoLEG<E> aux = primero; aux != null; aux = aux.getSiguiente()){
+            res+= (aux.getDato().toString()) + "\n";
+        }
+        return res;
     }
 }
