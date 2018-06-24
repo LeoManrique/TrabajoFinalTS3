@@ -15,21 +15,22 @@ import misClases.GestionPedidos;
 
 public final class MiFormulario extends javax.swing.JFrame {
     
-    DefaultTableModel modelo1,modelo2;
+    DefaultTableModel modelo;
     
     public MiFormulario() {
         initComponents();    
         setLocationRelativeTo(this);
         GestionPedidos gestion = new GestionPedidos();
-        Cargar();
+        CargarPedidos();
+        CargarComidas();
         
     }
-    public void Cargar(){
+    public void CargarPedidos(){
         String []cabecera={"Sucursal","Monto Recaudado"};
         String []registros=new String[2];
         
-        modelo1=new DefaultTableModel(null, cabecera);
-        String sql="Select * from pedidos";
+        modelo = new DefaultTableModel(null, cabecera);
+        String sql = "Select * from pedidos";
                 
         Conexion conexion = new Conexion();
         Connection cn = conexion.conexion();
@@ -41,23 +42,38 @@ public final class MiFormulario extends javax.swing.JFrame {
             while(rs.next()){
                 registros[0]=rs.getString("sucursal");
                 registros[1]=rs.getString("montor");
-                modelo1.addRow(registros);
+                modelo.addRow(registros);
             }
-            jTableListadoPedidos.setModel(modelo1);           
+            jTableListadoPedidos.setModel(modelo);           
         } catch (SQLException e) {
             System.out.println("Error ...."+e.toString());       
-        } 
+        }         
+    }
+    public void CargarComidas(){
+        String []cabecera={"Sucursal","Comida","Cantidad","Precio"};        
+        String []registros=new String[4];
         
-        /*Conexion conexion = new Conexion();
-        conexion.conexion();
-        String tituloP[] = {"Sucursal","Monto Recaudado"},
-               tituloC[] = {"Sucursal","Comida","Cantidad","Precio"};
-        modelo1 = new DefaultTableModel(null,tituloP);        
-        modelo2 = new DefaultTableModel(null,tituloC);
+        modelo = new DefaultTableModel(null, cabecera);
+        String sql = "Select * from comida";
+                
+        Conexion conexion = new Conexion();
+        Connection cn = conexion.conexion();
         
-        jTableListadoPedidos.setModel(modelo1);
-        jTableListadoComidas.setModel(modelo2);
-        */
+        try {        
+            Statement st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            
+            while(rs.next()){
+                registros[0]=rs.getString("sucursal");
+                registros[1]=rs.getString("nombre");
+                registros[2]=rs.getString("cantidad");
+                registros[3]=rs.getString("precio");
+                modelo.addRow(registros);
+            }
+            jTableListadoComidas.setModel(modelo);           
+        } catch (SQLException e) {
+            System.out.println("Error ...."+e.toString());       
+        }         
     }
 
     /**
@@ -73,7 +89,6 @@ public final class MiFormulario extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListadoPedidos = new javax.swing.JTable();
-        jButtonVerPedidos = new javax.swing.JButton();
         jButtonActualizarMontoR = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -96,7 +111,6 @@ public final class MiFormulario extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListadoComidas = new javax.swing.JTable();
         jButtonComidaMayorMonto = new javax.swing.JButton();
-        jButtonVerListadoComidas = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Restaurante");
@@ -121,13 +135,6 @@ public final class MiFormulario extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableListadoPedidos);
 
-        jButtonVerPedidos.setText("Ver Pedidos");
-        jButtonVerPedidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButtonVerPedidosActionPerformed(evt);
-            }
-        });
-
         jButtonActualizarMontoR.setText("Actualizar Monto Recaudado");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -139,8 +146,7 @@ public final class MiFormulario extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButtonVerPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(35, 35, 35)
+                        .addGap(138, 138, 138)
                         .addComponent(jButtonActualizarMontoR)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -150,10 +156,8 @@ public final class MiFormulario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonVerPedidos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButtonActualizarMontoR))
-                .addGap(0, 19, Short.MAX_VALUE))
+                .addComponent(jButtonActualizarMontoR)
+                .addGap(0, 26, Short.MAX_VALUE))
         );
 
         jButtonSalir.setText("Salir");
@@ -219,6 +223,11 @@ public final class MiFormulario extends javax.swing.JFrame {
         });
 
         jButtonAgregarComida.setText("Agregar Comida");
+        jButtonAgregarComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonAgregarComidaActionPerformed(evt);
+            }
+        });
 
         jButtonEliminarComida.setText("Eliminar Comida");
 
@@ -303,23 +312,16 @@ public final class MiFormulario extends javax.swing.JFrame {
             }
         });
 
-        jButtonVerListadoComidas.setText("Ver");
-
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(22, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButtonComidaMayorMonto)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButtonVerListadoComidas)
-                        .addGap(52, 52, 52))))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButtonComidaMayorMonto)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -327,9 +329,7 @@ public final class MiFormulario extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonComidaMayorMonto)
-                    .addComponent(jButtonVerListadoComidas))
+                .addComponent(jButtonComidaMayorMonto)
                 .addGap(27, 27, 27))
         );
 
@@ -388,10 +388,6 @@ public final class MiFormulario extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButtonVerPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonVerPedidosActionPerformed
-           
-    }//GEN-LAST:event_jButtonVerPedidosActionPerformed
-
     private void jButtonComidaMayorMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComidaMayorMontoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButtonComidaMayorMontoActionPerformed
@@ -412,7 +408,7 @@ public final class MiFormulario extends javax.swing.JFrame {
        String sql;
        int suc = Integer.parseInt(jTextFieldSucursalPedido.getText());
        
-       sql="insert into pedidos(sucursal,montor) Values (?,0)";
+       sql="insert into pedidos (sucursal,montor) Values (?,0)";
         try {
             PreparedStatement pst = reg.prepareStatement(sql);
             pst.setInt(1, suc);
@@ -421,11 +417,38 @@ public final class MiFormulario extends javax.swing.JFrame {
             if(n!=0){
                 JOptionPane.showMessageDialog(this, "Valores cargados .......");
             }
-            Cargar();            
+            CargarPedidos();            
         } catch (SQLException e) {
             System.out.println("Error encontrado  "+e.toString());
         }
     }//GEN-LAST:event_jButtonAgregarPedidoActionPerformed
+
+    private void jButtonAgregarComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarComidaActionPerformed
+       Conexion cn = new Conexion();       
+       Connection reg = cn.conexion();       
+       String sql;
+       int suc = Integer.parseInt(jTextFieldSucursalPedido.getText());
+       String nom = jTextFieldNombreComida.getText();
+       int cant = Integer.parseInt(jTextFieldCantidad.getText());
+       double precio = Double.parseDouble(jTextFieldPrecio.getText());
+       
+       sql="insert into comida (sucursal,nombre,cantidad,precio) Values (?,?,?,?)";
+        try {
+            PreparedStatement pst = reg.prepareStatement(sql);
+            pst.setInt(1, suc);
+            pst.setString(2, nom);
+            pst.setInt(3, cant);
+            pst.setDouble(4, precio);
+            
+            int n = pst.executeUpdate();
+            if(n!=0){
+                JOptionPane.showMessageDialog(this, "Valores cargados .......");
+            }
+            CargarComidas();            
+        } catch (SQLException e) {
+            System.out.println("Error encontrado  "+e.toString());
+        }
+    }//GEN-LAST:event_jButtonAgregarComidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -472,8 +495,6 @@ public final class MiFormulario extends javax.swing.JFrame {
     private javax.swing.JButton jButtonComidaMayorMonto;
     private javax.swing.JButton jButtonEliminarComida;
     private javax.swing.JButton jButtonSalir;
-    private javax.swing.JButton jButtonVerListadoComidas;
-    private javax.swing.JButton jButtonVerPedidos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
