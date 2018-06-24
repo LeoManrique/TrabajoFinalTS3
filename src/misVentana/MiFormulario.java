@@ -18,8 +18,6 @@ import misClases.Pedido;
 
 public final class MiFormulario extends javax.swing.JFrame {
     
-    ListaLEG<Comida> listaCom;
-    DefaultTableModel modelo;
     GestionPedidos gestion;
     public MiFormulario() {
         initComponents();    
@@ -30,14 +28,15 @@ public final class MiFormulario extends javax.swing.JFrame {
         setLocationRelativeTo(this);
         gestion = new GestionPedidos();
         CargarPedidos();
-        gestion.toString();
+        System.out.println(gestion.toString());
         
     }
     public void CargarPedidos(){
-        String []cabecera={"Sucursal","Monto Recaudado"};
-        String []registros=new String[2];
+        DefaultTableModel modeloPedidos;
+        String []cabeceraP={"Sucursal","Monto Recaudado"};
+        String []registrosP=new String[2];
         
-        modelo = new DefaultTableModel(null, cabecera);
+        modeloPedidos = new DefaultTableModel(null, cabeceraP);
         String sql = "Select * from pedidos";
                 
         Conexion conexion = new Conexion();
@@ -48,24 +47,25 @@ public final class MiFormulario extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(sql);
             
             while(rs.next()){
-                registros[0]=rs.getString("sucursal");
-                registros[1]=rs.getString("montor");
-                modelo.addRow(registros);
-                Pedido pedido = new Pedido(Integer.parseInt(registros[0]));
+                registrosP[0]=rs.getString("sucursal");
+                registrosP[1]=rs.getString("montor");
+                modeloPedidos.addRow(registrosP);
+                Pedido pedido = new Pedido(Integer.parseInt(registrosP[0]));
                 pedido.calcularMontoR();
                 gestion.encolarPedido(pedido);
             }
             CargarComidas();
-            jTableListadoPedidos.setModel(modelo);           
+            jTableListadoPedidos.setModel(modeloPedidos);           
         } catch (SQLException e) {
             System.out.println("Error ...."+e.getMessage());       
         }         
     }
     public void CargarComidas(){
-        String []cabecera={"Sucursal","Comida","Cantidad","Precio"};        
-        String []registros=new String[4];
+        DefaultTableModel modeloComidas;
+        String []cabeceraC={"Sucursal","Comida","Cantidad","Precio"};        
+        String []registrosC=new String[4];
         
-        modelo = new DefaultTableModel(null, cabecera);
+        modeloComidas = new DefaultTableModel(null, cabeceraC);
         String sql = "Select * from comida";
                 
         Conexion conexion = new Conexion();
@@ -76,17 +76,18 @@ public final class MiFormulario extends javax.swing.JFrame {
             ResultSet rs = st.executeQuery(sql);
             
             while(rs.next()){
-                registros[0]=rs.getString("sucursal");
-                registros[1]=rs.getString("nombre");
-                registros[2]=rs.getString("cantidad");
-                registros[3]=rs.getString("precio");
-                modelo.addRow(registros);
-                gestion.getPedido(Integer.parseInt(registros[0])).getLista().agregarNuevaComida(
-                        new Comida(registros[1], Double.parseDouble(registros[2]), Integer.parseInt(registros[3]))
+                registrosC[0]=rs.getString("sucursal");
+                registrosC[1]=rs.getString("nombre");
+                registrosC[2]=rs.getString("cantidad");
+                registrosC[3]=rs.getString("precio");
+                modeloComidas.addRow(registrosC);
+                gestion.getPedido(Integer.parseInt(registrosC[0])).getLista().agregarNuevaComida(
+                        new Comida(registrosC[1], Double.parseDouble(registrosC[2]), Integer.parseInt(registrosC[3]))
                 );
             }
             gestion.actualizarMontosPedidos();
-            jTableListadoComidas.setModel(modelo);           
+            System.out.println(gestion.toString());
+            jTableListadoComidas.setModel(modeloComidas);           
         } catch (SQLException e) {
             System.out.println("Error ...."+e.getMessage());       
         }         
@@ -406,6 +407,7 @@ public final class MiFormulario extends javax.swing.JFrame {
 
     private void jButtonComidaMayorMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComidaMayorMontoActionPerformed
         // TODO add your handling code here:
+        System.out.println(gestion.toString());
     }//GEN-LAST:event_jButtonComidaMayorMontoActionPerformed
 
     private void jTextFieldNombreComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreComidaActionPerformed
@@ -446,7 +448,7 @@ public final class MiFormulario extends javax.swing.JFrame {
        Connection reg = cn.conexion();       
        String sql;
        //AQUI TIENE QUE COGER EL NRO DE SUCURSAL QUE SE REGISTRO
-       int suc = Integer.parseInt(jTextFieldSucursalPedido.getText());
+       int suc = Integer.parseInt(jTextFieldSucursalComida.getText());
        //
        String nom = jTextFieldNombreComida.getText();
        int cant = Integer.parseInt(jTextFieldCantidad.getText());
@@ -455,6 +457,7 @@ public final class MiFormulario extends javax.swing.JFrame {
        sql="insert into comida (sucursal,nombre,cantidad,precio) Values (?,?,?,?)";
         try {
             PreparedStatement pst = reg.prepareStatement(sql);
+            PreparedStatement pst2 = reg.prepareStatement(sql2);
             pst.setInt(1, suc);
             pst.setString(2, nom);
             pst.setInt(3, cant);
@@ -462,9 +465,9 @@ public final class MiFormulario extends javax.swing.JFrame {
             
             int n = pst.executeUpdate();
             if(n!=0){
-                JOptionPane.showMessageDialog(this, "Valores cargados .......");
+                //JOptionPane.showMessageDialog(this, "Valores cargados .......");
             }
-            CargarComidas();            
+            CargarPedidos();            
         } catch (SQLException e) {
             System.out.println("Error encontrado  "+e.getMessage());
         }

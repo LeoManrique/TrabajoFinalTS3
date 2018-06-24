@@ -42,7 +42,7 @@ public class GestionPedidos <E extends Pedido> {
         if (!validarRepetido(sucursal)){
             cola.encolar(x);
         } else {
-            System.out.println("La sucursal "+sucursal+" ya existe");
+            //System.out.println("La sucursal "+sucursal+" ya existe");
         }
     }
     

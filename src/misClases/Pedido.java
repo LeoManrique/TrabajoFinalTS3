@@ -29,11 +29,7 @@ public class Pedido extends Object {
     public void calcularMontoR() {
         double monto = 0;
         if (lista.getTalla() > 0){
-            NodoLEG<Comida> comida = lista.getPrimero();
-            do{
-                montoR+= comida.getDato().getMontoAPagar();
-                comida = comida.getSiguiente();
-            } while (comida.getSiguiente() != null);
+            monto = lista.getMontoLista();
             this.montoR = monto;
         }
     }

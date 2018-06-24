@@ -92,7 +92,7 @@ public class ListaLEG<E extends Comida> {
         }
         if(aux!=null){
             if(aux.getDato().getNombre().equalsIgnoreCase(x.getNombre())){
-                JOptionPane.showMessageDialog(null, "La comida ya existe ......");
+                //JOptionPane.showMessageDialog(null, "La comida ya existe ......");
             }else{
                 if(aux==primero){
                     insertarAlInicio(x);
@@ -109,6 +109,20 @@ public class ListaLEG<E extends Comida> {
         
         }    
     }
+    public double getMontoLista(){
+        double monto = 0;
+        NodoLEG<E> aux = primero;
+        if (aux != null) {
+            monto+=aux.getDato().getMontoAPagar();
+            
+            while (aux.getSiguiente()!=null){
+                aux = aux.getSiguiente();
+                monto+=aux.getDato().getMontoAPagar();
+            }
+        }
+        return monto;
+    }
+    
     public E getComidaMayorMonto(){
         NodoLEG<E> nodo = primero;
         double monto_maximo = 0;
