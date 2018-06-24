@@ -34,33 +34,27 @@ CREATE TABLE `pedidos` (
   `montor` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-ALTER TABLE `comida`
-  ADD KEY `fkey` (`sucursal`);
-
-
-ALTER TABLE `pedidos`
-  ADD PRIMARY KEY (`sucursal`);
-
-ALTER TABLE `comida`
-  ADD CONSTRAINT `fkey` FOREIGN KEY (`sucursal`) REFERENCES `pedidos` (`sucursal`) ON DELETE CASCADE ON UPDATE CASCADE;
-
-CREATE TRIGGER aumentarMontoR
-  AFTER INSERT
-  ON comida
-  FOR EACH ROW
-  BEGIN
+DELIMITER $$
+CREATE TRIGGER `aumentarMontoR` AFTER INSERT ON `comida` FOR EACH ROW BEGIN
     UPDATE pedidos
     SET montor = montor + NEW.precio*NEW.cantidad
     WHERE sucursal = NEW.sucursal;
-  END;
-
-CREATE TRIGGER disminuirMontoR
-  AFTER DELETE
-  ON comida
-  FOR EACH ROW
-  BEGIN
+  END
+$$
+DELIMITER ;
+DELIMITER $$
+CREATE TRIGGER `disminuirMontoR` AFTER DELETE ON `comida` FOR EACH ROW BEGIN
     UPDATE pedidos
     SET montor = montor - OLD.precio*OLD.cantidad
     WHERE sucursal = OLD.sucursal;
-  END;
+  END
+$$
+DELIMITER ;
+
+INSERT INTO `pedidos` (`sucursal`, `montor`) VALUES
+(1, 20),
+(2, 0);
+
+ALTER TABLE `pedidos`
+  ADD PRIMARY KEY (`sucursal`);
 */
