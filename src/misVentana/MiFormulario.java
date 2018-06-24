@@ -9,16 +9,23 @@ import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import miConexion.Conexion;
+import miLista.ListaLEG;
+import misClases.Comida;
 import misClases.GestionPedidos;
 
 
 
 public final class MiFormulario extends javax.swing.JFrame {
     
+    ListaLEG<Comida> listaCom;
     DefaultTableModel modelo;
     
     public MiFormulario() {
         initComponents();    
+        
+        listaCom = new ListaLEG<Comida>();
+        
+        
         setLocationRelativeTo(this);
         GestionPedidos gestion = new GestionPedidos();
         CargarPedidos();
@@ -427,6 +434,7 @@ public final class MiFormulario extends javax.swing.JFrame {
        Conexion cn = new Conexion();       
        Connection reg = cn.conexion();       
        String sql;
+       //AQUI TIENE QUE COGER EL NRO DE SUCURSAL QUE SE REGISTRO
        int suc = Integer.parseInt(jTextFieldSucursalPedido.getText());
        String nom = jTextFieldNombreComida.getText();
        int cant = Integer.parseInt(jTextFieldCantidad.getText());
