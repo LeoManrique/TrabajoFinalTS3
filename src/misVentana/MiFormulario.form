@@ -104,7 +104,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Listado de Pedidos">
-                  <Font PropertyName="font" name="Comic Sans MS" size="14" style="0"/>
+                  <Font PropertyName="font" name="Shruti" size="16" style="1"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -133,7 +133,7 @@
                       <Component id="jScrollPane2" min="-2" pref="128" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonActualizarMontoR" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="26" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="1" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -191,7 +191,7 @@
                       </Border>
                     </TitledBorder>
                   </Border>
-                  <Font PropertyName="font" name="Comic Sans MS" size="14" style="0"/>
+                  <Font PropertyName="font" name="Shruti" size="16" style="1"/>
                 </TitledBorder>
               </Border>
             </Property>
@@ -232,6 +232,9 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Shruti" size="13" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Sucursal:"/>
               </Properties>
             </Component>
@@ -254,7 +257,9 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                <TitledBorder title="Registro Comidas"/>
+                <TitledBorder title="Registro Comidas">
+                  <Font PropertyName="font" name="Shruti" size="16" style="1"/>
+                </TitledBorder>
               </Border>
             </Property>
           </Properties>
@@ -287,7 +292,7 @@
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="jButtonAgregarComida" max="32767" attributes="0"/>
                           <Component id="jButtonEliminarComida" max="32767" attributes="0"/>
-                          <Component id="jButton1" pref="192" max="32767" attributes="0"/>
+                          <Component id="jButtonEliminarCAleatoria" pref="192" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -321,7 +326,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jButtonEliminarComida" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                      <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                      <Component id="jButtonEliminarCAleatoria" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -330,21 +335,33 @@
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Shruti" size="13" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nro Sucursal:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Shruti" size="13" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Nombre de comida:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel3">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Shruti" size="13" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Cantidad:"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Shruti" size="13" style="0"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Precio:"/>
               </Properties>
             </Component>
@@ -372,7 +389,7 @@
                 <Property name="text" type="java.lang.String" value="Eliminar Comida"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
+            <Component class="javax.swing.JButton" name="jButtonEliminarCAleatoria">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Eliminar Comida Aleatoria"/>
               </Properties>
@@ -387,7 +404,7 @@
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
                 <TitledBorder title="Listado de Comidas">
-                  <Font PropertyName="font" name="Tahoma" size="12" style="0"/>
+                  <Font PropertyName="font" name="Shruti" size="16" style="1"/>
                 </TitledBorder>
               </Border>
             </Property>

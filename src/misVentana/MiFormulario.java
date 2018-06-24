@@ -123,7 +123,7 @@ public final class MiFormulario extends javax.swing.JFrame {
         jTextFieldPrecio = new javax.swing.JTextField();
         jButtonAgregarComida = new javax.swing.JButton();
         jButtonEliminarComida = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jButtonEliminarCAleatoria = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTableListadoComidas = new javax.swing.JTable();
@@ -135,7 +135,7 @@ public final class MiFormulario extends javax.swing.JFrame {
         jPanelFondo.setBackground(new java.awt.Color(255, 204, 153));
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 153));
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de Pedidos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 14))); // NOI18N
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de Pedidos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Shruti", 1, 16))); // NOI18N
 
         jTableListadoPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -174,7 +174,7 @@ public final class MiFormulario extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonActualizarMontoR)
-                .addGap(0, 26, Short.MAX_VALUE))
+                .addGap(0, 1, Short.MAX_VALUE))
         );
 
         jButtonSalir.setText("Salir");
@@ -185,8 +185,9 @@ public final class MiFormulario extends javax.swing.JFrame {
         });
 
         jPanel5.setBackground(new java.awt.Color(255, 153, 153));
-        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("")), "Registro Pedidos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Comic Sans MS", 0, 14))); // NOI18N
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createTitledBorder("")), "Registro Pedidos", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Shruti", 1, 16))); // NOI18N
 
+        jLabel4.setFont(new java.awt.Font("Shruti", 0, 13)); // NOI18N
         jLabel4.setText("Sucursal:");
 
         jButtonAgregarPedido.setText("Registrar Pedido");
@@ -223,14 +224,18 @@ public final class MiFormulario extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 153, 102));
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Registro Comidas"));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Registro Comidas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Shruti", 1, 16))); // NOI18N
 
+        jLabel1.setFont(new java.awt.Font("Shruti", 0, 13)); // NOI18N
         jLabel1.setText("Nro Sucursal:");
 
+        jLabel2.setFont(new java.awt.Font("Shruti", 0, 13)); // NOI18N
         jLabel2.setText("Nombre de comida:");
 
+        jLabel3.setFont(new java.awt.Font("Shruti", 0, 13)); // NOI18N
         jLabel3.setText("Cantidad:");
 
+        jLabel5.setFont(new java.awt.Font("Shruti", 0, 13)); // NOI18N
         jLabel5.setText("Precio:");
 
         jTextFieldNombreComida.addActionListener(new java.awt.event.ActionListener() {
@@ -248,7 +253,7 @@ public final class MiFormulario extends javax.swing.JFrame {
 
         jButtonEliminarComida.setText("Eliminar Comida");
 
-        jButton1.setText("Eliminar Comida Aleatoria");
+        jButtonEliminarCAleatoria.setText("Eliminar Comida Aleatoria");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -275,7 +280,7 @@ public final class MiFormulario extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonAgregarComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButtonEliminarComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
+                    .addComponent(jButtonEliminarCAleatoria, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -302,12 +307,12 @@ public final class MiFormulario extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonEliminarComida)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton1)
+                .addComponent(jButtonEliminarCAleatoria)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(204, 255, 153));
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de Comidas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Listado de Comidas", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Shruti", 1, 16))); // NOI18N
 
         jTableListadoComidas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -338,7 +343,7 @@ public final class MiFormulario extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jButtonComidaMayorMonto)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -510,11 +515,11 @@ public final class MiFormulario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButtonActualizarMontoR;
     private javax.swing.JButton jButtonAgregarComida;
     private javax.swing.JButton jButtonAgregarPedido;
     private javax.swing.JButton jButtonComidaMayorMonto;
+    private javax.swing.JButton jButtonEliminarCAleatoria;
     private javax.swing.JButton jButtonEliminarComida;
     private javax.swing.JButton jButtonSalir;
     private javax.swing.JLabel jLabel1;
