@@ -457,7 +457,6 @@ public final class MiFormulario extends javax.swing.JFrame {
        sql="insert into comida (sucursal,nombre,cantidad,precio) Values (?,?,?,?)";
         try {
             PreparedStatement pst = reg.prepareStatement(sql);
-            PreparedStatement pst2 = reg.prepareStatement(sql2);
             pst.setInt(1, suc);
             pst.setString(2, nom);
             pst.setInt(3, cant);

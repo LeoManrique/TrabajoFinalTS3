@@ -43,5 +43,24 @@ ALTER TABLE `pedidos`
 
 ALTER TABLE `comida`
   ADD CONSTRAINT `fkey` FOREIGN KEY (`sucursal`) REFERENCES `pedidos` (`sucursal`) ON DELETE CASCADE ON UPDATE CASCADE;
-COMMIT;
+
+CREATE TRIGGER aumentarMontoR
+  AFTER INSERT
+  ON comida
+  FOR EACH ROW
+  BEGIN
+    UPDATE pedidos
+    SET montor = montor + NEW.precio*NEW.cantidad
+    WHERE sucursal = NEW.sucursal;
+  END;
+
+CREATE TRIGGER disminuirMontoR
+  AFTER DELETE
+  ON comida
+  FOR EACH ROW
+  BEGIN
+    UPDATE pedidos
+    SET montor = montor - OLD.precio*OLD.cantidad
+    WHERE sucursal = OLD.sucursal;
+  END;
 */
