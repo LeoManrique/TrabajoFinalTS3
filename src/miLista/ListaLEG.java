@@ -3,6 +3,7 @@ package miLista;
 import java.util.Random;
 import javax.swing.JOptionPane;
 import misClases.Comida;
+import misClases.Pedidos;
 
 public class ListaLEG<E extends Comida> {
     private NodoLEG<E> primero;
@@ -128,4 +129,21 @@ public class ListaLEG<E extends Comida> {
         }
         return comida_maxima;
     }
+   /* 
+    public void agregarCom_Pedido(Comida refP, int suc){
+        NodoLEG<E> aux=primero;
+        boolean estado = false;
+        
+        while(aux!=null && estado==false){
+            if(aux.getDato().g()==suc){
+                estado=true;
+                aux.getDato().agregarproducto(refP);
+            }else{
+                aux=aux.getSiguiente();
+            }
+        }
+        if(estado==false){
+            JOptionPane.showMessageDialog(null, "Proveedor no existe ");
+        }      
+    }*/
 }
