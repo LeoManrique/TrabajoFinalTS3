@@ -13,7 +13,7 @@ public class Conexion {
         try {
             Class.forName("com.mysql.jdbc.Driver");
             con=DriverManager.getConnection("jdbc:mysql://localhost/restaurante", "root", ""); //crear BD restaurante
-            JOptionPane.showMessageDialog(null, "Conexion establecida .......");
+            //JOptionPane.showMessageDialog(null, "Conexion establecida .......");
         } catch (ClassNotFoundException | SQLException ex) {
             System.out.println("Error en la conexion "+ex.getMessage());        
         }
