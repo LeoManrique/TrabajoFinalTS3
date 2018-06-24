@@ -27,7 +27,7 @@ public class GestionPedidos <E extends Pedido> {
             cola.desencolar();
             colaAux.encolar(pedido);
         }
-        while (!cola.colaVacia()){
+        while (!colaAux.colaVacia()){
             pedido = cola.frentec();
             colaAux.desencolar();
             cola.encolar(pedido);
@@ -53,7 +53,7 @@ public class GestionPedidos <E extends Pedido> {
                 colaAux.encolar(pedido);
             }
         }
-        while (!cola.colaVacia()){
+        while (!colaAux.colaVacia()){
             pedido = cola.frentec();
             colaAux.desencolar();
             cola.encolar(pedido);
@@ -70,11 +70,61 @@ public class GestionPedidos <E extends Pedido> {
                 colaAux.encolar(pedido);
             }
         }
-        while (!cola.colaVacia()){
+        while (!colaAux.colaVacia()){
             pedido = cola.frentec();
             colaAux.desencolar();
             cola.encolar(pedido);
         }
     }
     
+    public Pedido getPedido(int sucursal){
+        ArrayCola<E> colaAux = new ArrayCola<>(); 
+        E pedido;
+        E pedidoRet = null;
+        while (!cola.colaVacia()){
+            pedido = cola.frentec();
+            cola.desencolar();
+            colaAux.encolar(pedido);
+            if (pedido.getSucursal() == sucursal){
+                pedidoRet = pedido;
+            }
+        }
+        while (!colaAux.colaVacia()){
+            pedido = cola.frentec();
+            colaAux.desencolar();
+            cola.encolar(pedido);
+        }
+        return pedidoRet;
+    }
+    public void eliminarPedido(int sucursal){
+        ArrayCola<E> colaAux = new ArrayCola<>(); 
+        E pedido;
+        while (!cola.colaVacia()){
+            pedido = cola.frentec();
+            cola.desencolar();
+            if (pedido.getSucursal() != sucursal){
+                colaAux.encolar(pedido);
+            }
+        }
+        while (!colaAux.colaVacia()){
+            pedido = cola.frentec();
+            colaAux.desencolar();
+            cola.encolar(pedido);
+        }
+    }
+    public void actualizarMontosPedidos(){
+        ArrayCola<E> colaAux = new ArrayCola<>(); 
+        E pedido;
+        while (!cola.colaVacia()){
+            pedido = cola.frentec();
+            cola.desencolar();
+            pedido.calcularMontoR();
+            colaAux.encolar(pedido);
+        }
+        while (!colaAux.colaVacia()){
+            pedido = cola.frentec();
+            colaAux.desencolar();
+            cola.encolar(pedido);
+        }
+    }
 }

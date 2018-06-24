@@ -52,8 +52,8 @@ public final class MiFormulario extends javax.swing.JFrame {
                 registros[1]=rs.getString("montor");
                 modelo.addRow(registros);
                 Pedido pedido = new Pedido(Integer.parseInt(registros[0]));
-                pedido.getMontoR();
-                gestion.encolarPedido();
+                pedido.calcularMontoR();
+                gestion.encolarPedido(pedido);
             }
             jTableListadoPedidos.setModel(modelo);           
         } catch (SQLException e) {

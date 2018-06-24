@@ -26,7 +26,7 @@ public class Pedido extends Object {
         return montoR;
     }
 
-    public void generarMontoR() {
+    public void calcularMontoR() {
         double monto = 0;
         if (lista.getTalla() > 0){
             NodoLEG<Comida> comida = lista.getPrimero();
