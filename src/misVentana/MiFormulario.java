@@ -418,7 +418,13 @@ public final class MiFormulario extends javax.swing.JFrame {
 
     private void jButtonComidaMayorMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComidaMayorMontoActionPerformed
         // TODO add your handling code here:
+
        // System.out.println(gestion.toString());
+
+        System.out.println(gestion.toString());
+        int pos = jTableListadoComidas.getSelectedColumn();
+        System.out.println(jTableListadoComidas.getModel());
+
     }//GEN-LAST:event_jButtonComidaMayorMontoActionPerformed
 
     private void jTextFieldNombreComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreComidaActionPerformed
