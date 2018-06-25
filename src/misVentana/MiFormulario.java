@@ -18,7 +18,12 @@ import misClases.Pedido;
 
 public final class MiFormulario extends javax.swing.JFrame {
     
-    GestionPedidos gestion;    
+    GestionPedidos gestion;
+    String []registrosP;
+    String []registrosC;
+    DefaultTableModel modeloPedidos;
+    DefaultTableModel modeloComidas;
+    
     public MiFormulario() {
         initComponents();    
         
@@ -32,9 +37,8 @@ public final class MiFormulario extends javax.swing.JFrame {
         
     }
     public void CargarPedidos(){
-        DefaultTableModel modeloPedidos;
         String []cabeceraP={"Sucursal","Monto Recaudado"};
-        String []registrosP=new String[2];
+        registrosP=new String[2];
         
         modeloPedidos = new DefaultTableModel(null, cabeceraP);
         String sql = "Select * from pedidos";
@@ -61,9 +65,8 @@ public final class MiFormulario extends javax.swing.JFrame {
         }         
     }
     public void CargarComidas(){
-        DefaultTableModel modeloComidas;
         String []cabeceraC={"Sucursal","Comida","Cantidad","PrecioU"};        
-        String []registrosC=new String[4];
+        registrosC=new String[4];
         
         modeloComidas = new DefaultTableModel(null, cabeceraC);
         String sql = "Select * from comida";
@@ -414,10 +417,22 @@ public final class MiFormulario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonComidaMayorMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComidaMayorMontoActionPerformed
+
         
        //System.out.println(gestion.getPedido(SUCURSAL)getLista().getComidaMayorMonto().getNombre());
        // int pos = jTableListadoComidas.getSelectedColumn();
        //System.out.println(jTableListadoComidas.getModel());
+
+        // TODO add your handling code here:
+        int pos = jTableListadoComidas.getSelectedRow();
+        
+        int sucursal = Integer.parseInt(modeloComidas.getValueAt(pos, 0).toString());
+        String comida = modeloComidas.getValueAt(pos, 1).toString();
+        
+        System.out.println(sucursal+" "+comida);
+       // System.out.println(gestion.toString());
+
+
 
     }//GEN-LAST:event_jButtonComidaMayorMontoActionPerformed
 
@@ -484,6 +499,7 @@ public final class MiFormulario extends javax.swing.JFrame {
     }//GEN-LAST:event_jButtonAgregarComidaActionPerformed
 
     private void jButtonEliminarComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarComidaActionPerformed
+
         /*DefaultTableModel model;
         model = new DefaultTableModel();
         jTableListadoComidas.setModel(model);  
