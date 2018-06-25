@@ -81,8 +81,7 @@ public final class MiFormulario extends javax.swing.JFrame {
                 registrosC[2]=rs.getString("cantidad");
                 registrosC[3]=rs.getString("precio");
                 modeloComidas.addRow(registrosC);
-                gestion.getPedido(Integer.parseInt(registrosC[0])).getLista().agregarNuevaComida(
-                        new Comida(registrosC[1], Integer.parseInt(registrosC[2]),Double.parseDouble(registrosC[3]))
+                gestion.getPedido(Integer.parseInt(registrosC[0])).getLista().agregarNuevaComida(new Comida(registrosC[1],Integer.parseInt(registrosC[2]),Double.parseDouble(registrosC[3]))
                 );
             }
             
@@ -415,13 +414,10 @@ public final class MiFormulario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonComidaMayorMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComidaMayorMontoActionPerformed
-        // TODO add your handling code here:
-
-       // System.out.println(gestion.toString());
-
-        //System.out.println(gestion.toString());
-        int pos = jTableListadoComidas.getSelectedColumn();
-        System.out.println(jTableListadoComidas.getModel());
+        
+       //System.out.println(gestion.getPedido(SUCURSAL)getLista().getComidaMayorMonto().getNombre());
+       // int pos = jTableListadoComidas.getSelectedColumn();
+       //System.out.println(jTableListadoComidas.getModel());
 
     }//GEN-LAST:event_jButtonComidaMayorMontoActionPerformed
 
