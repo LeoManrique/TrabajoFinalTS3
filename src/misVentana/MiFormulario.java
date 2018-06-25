@@ -18,7 +18,7 @@ import misClases.Pedido;
 
 public final class MiFormulario extends javax.swing.JFrame {
     
-    GestionPedidos gestion;
+    GestionPedidos gestion;    
     public MiFormulario() {
         initComponents();    
         
@@ -28,7 +28,7 @@ public final class MiFormulario extends javax.swing.JFrame {
         setLocationRelativeTo(this);
         gestion = new GestionPedidos();
         CargarPedidos();
-        System.out.println(gestion.toString());
+        //System.out.println(gestion.toString());
         
     }
     public void CargarPedidos(){
@@ -62,7 +62,7 @@ public final class MiFormulario extends javax.swing.JFrame {
     }
     public void CargarComidas(){
         DefaultTableModel modeloComidas;
-        String []cabeceraC={"Sucursal","Comida","Cantidad","Precio"};        
+        String []cabeceraC={"Sucursal","Comida","Cantidad","PrecioU"};        
         String []registrosC=new String[4];
         
         modeloComidas = new DefaultTableModel(null, cabeceraC);
@@ -82,11 +82,11 @@ public final class MiFormulario extends javax.swing.JFrame {
                 registrosC[3]=rs.getString("precio");
                 modeloComidas.addRow(registrosC);
                 gestion.getPedido(Integer.parseInt(registrosC[0])).getLista().agregarNuevaComida(
-                        new Comida(registrosC[1], Double.parseDouble(registrosC[2]), Integer.parseInt(registrosC[3]))
+                        new Comida(registrosC[1], Integer.parseInt(registrosC[2]),Double.parseDouble(registrosC[3]))
                 );
             }
-            gestion.actualizarMontosPedidos();
-            System.out.println(gestion.toString());
+            
+         //   System.out.println(gestion.toString());
             jTableListadoComidas.setModel(modeloComidas);           
         } catch (SQLException e) {
             System.out.println("Error ...."+e.getMessage());       
@@ -106,7 +106,6 @@ public final class MiFormulario extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableListadoPedidos = new javax.swing.JTable();
-        jButtonActualizarMontoR = new javax.swing.JButton();
         jButtonSalir = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -152,19 +151,13 @@ public final class MiFormulario extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(jTableListadoPedidos);
 
-        jButtonActualizarMontoR.setText("Actualizar Monto Recaudado");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(138, 138, 138)
-                        .addComponent(jButtonActualizarMontoR)))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -172,9 +165,7 @@ public final class MiFormulario extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButtonActualizarMontoR)
-                .addGap(0, 17, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jButtonSalir.setText("Salir");
@@ -190,7 +181,7 @@ public final class MiFormulario extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Shruti", 0, 13)); // NOI18N
         jLabel4.setText("Sucursal:");
 
-        jButtonAgregarPedido.setText("Registrar Pedido");
+        jButtonAgregarPedido.setText("Registrar Sucursal");
         jButtonAgregarPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonAgregarPedidoActionPerformed(evt);
@@ -218,7 +209,7 @@ public final class MiFormulario extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jTextFieldSucursalPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 55, Short.MAX_VALUE)
                 .addComponent(jButtonAgregarPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
         );
@@ -252,6 +243,11 @@ public final class MiFormulario extends javax.swing.JFrame {
         });
 
         jButtonEliminarComida.setText("Eliminar Comida");
+        jButtonEliminarComida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarComidaActionPerformed(evt);
+            }
+        });
 
         jButtonEliminarCAleatoria.setText("Eliminar Comida Aleatoria");
 
@@ -260,12 +256,6 @@ public final class MiFormulario extends javax.swing.JFrame {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(81, 81, 81)
-                .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jTextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jButtonAgregarComida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -273,21 +263,31 @@ public final class MiFormulario extends javax.swing.JFrame {
                     .addComponent(jButtonEliminarCAleatoria, javax.swing.GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addGap(40, 40, 40)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel2)
                             .addComponent(jLabel1))
-                        .addGroup(jPanel3Layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(jLabel2))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(22, 22, 22))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(jLabel5))
+                            .addComponent(jLabel3))
+                        .addGap(23, 23, 23)))
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldSucursalComida, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextFieldNombreComida, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 13, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jTextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldSucursalComida, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldNombreComida, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 13, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -305,9 +305,9 @@ public final class MiFormulario extends javax.swing.JFrame {
                     .addComponent(jLabel3)
                     .addComponent(jTextFieldCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel5)
-                    .addComponent(jTextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jTextFieldPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
                 .addGap(45, 45, 45)
                 .addComponent(jButtonAgregarComida)
                 .addGap(18, 18, 18)
@@ -418,7 +418,7 @@ public final class MiFormulario extends javax.swing.JFrame {
 
     private void jButtonComidaMayorMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComidaMayorMontoActionPerformed
         // TODO add your handling code here:
-        System.out.println(gestion.toString());
+       // System.out.println(gestion.toString());
     }//GEN-LAST:event_jButtonComidaMayorMontoActionPerformed
 
     private void jTextFieldNombreComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldNombreComidaActionPerformed
@@ -434,33 +434,33 @@ public final class MiFormulario extends javax.swing.JFrame {
        Conexion cn = new Conexion();       
        Connection reg = cn.conexion();       
        String sql;      
-       
        Pedido pedido = new Pedido(Integer.parseInt(jTextFieldSucursalPedido.getText()));
        
-        try {
-            gestion.encolarPedido(pedido);
-            sql="insert into pedidos (sucursal,montor) Values (?,0)";
-            PreparedStatement pst = reg.prepareStatement(sql);
-            pst.setInt(1, pedido.getSucursal());
+       if(!gestion.validarRepetido(pedido.getSucursal())){       
+            try {
+                gestion.encolarPedido(pedido);
+                sql="insert into pedidos (sucursal,montor) Values (?,0)";
+                PreparedStatement pst = reg.prepareStatement(sql);
+                pst.setInt(1, pedido.getSucursal());
 
-            int n = pst.executeUpdate();
-            if(n!=0){
-                JOptionPane.showMessageDialog(this, "Valores cargados .......");
+                int n = pst.executeUpdate();
+                if(n!=0){
+                    JOptionPane.showMessageDialog(this, "Cargando Sucursal ...");
+                }
+                CargarPedidos();   
+            } catch (SQLException e) {
+                System.out.println("Error encontrado  "+e.getMessage());
             }
-            CargarPedidos();   
-        } catch (SQLException e) {
-            System.out.println("Error encontrado  "+e.getMessage());
+        }else{
+           JOptionPane.showMessageDialog(null,"La sucursal "+pedido.getSucursal()+" ya ha sido registrada . . .");
         }
-
     }//GEN-LAST:event_jButtonAgregarPedidoActionPerformed
 
     private void jButtonAgregarComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarComidaActionPerformed
        Conexion cn = new Conexion();       
        Connection reg = cn.conexion();       
        String sql;
-       //AQUI TIENE QUE COGER EL NRO DE SUCURSAL QUE SE REGISTRO
-       int suc = Integer.parseInt(jTextFieldSucursalComida.getText());
-       //
+       int suc = Integer.parseInt(jTextFieldSucursalComida.getText());       
        String nom = jTextFieldNombreComida.getText();
        int cant = Integer.parseInt(jTextFieldCantidad.getText());
        double precio = Double.parseDouble(jTextFieldPrecio.getText());
@@ -482,6 +482,31 @@ public final class MiFormulario extends javax.swing.JFrame {
             System.out.println("Error encontrado  "+e.getMessage());
         }
     }//GEN-LAST:event_jButtonAgregarComidaActionPerformed
+
+    private void jButtonEliminarComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarComidaActionPerformed
+        /*DefaultTableModel model;
+        model = new DefaultTableModel();
+        jTableListadoComidas.setModel(model);  
+        Conexion cn = new Conexion();       
+        Connection reg = cn.conexion();       
+        String sql;*/
+       // int i = jTableListadoComidas.get.getSelectedRow();
+        //System.out.println(i);
+        /*
+        sql="delete"+i+"from comida (sucursal,nombre,cantidad,precio) Values (?,?,?,?)";
+        
+       
+        if(i>=0){
+            model.removeRow(i);
+        }else{
+            JOptionPane.showMessageDialog(null,"No se puede eliminar ..");
+        }
+        double total = 0;
+        for (int j = 0; j < model.getRowCount(); j++) {
+            int amount = Integer.parseInt((String) jTableListadoComidas.getValueAt(j, 3));
+            total+=amount;
+        }*/
+    }//GEN-LAST:event_jButtonEliminarComidaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -521,7 +546,6 @@ public final class MiFormulario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButtonActualizarMontoR;
     private javax.swing.JButton jButtonAgregarComida;
     private javax.swing.JButton jButtonAgregarPedido;
     private javax.swing.JButton jButtonComidaMayorMonto;
