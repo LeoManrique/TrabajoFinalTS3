@@ -18,6 +18,7 @@ import misClases.Pedido;
 
 public final class MiFormulario extends javax.swing.JFrame {
     
+    ListaLEG<Comida> listaCom;
     GestionPedidos gestion;
     String []registrosP;
     String []registrosC;
@@ -29,7 +30,7 @@ public final class MiFormulario extends javax.swing.JFrame {
     public MiFormulario() {
         initComponents();    
         
-        //listaCom = new ListaLEG<Comida>();
+        listaCom = new ListaLEG<>();
         conexion = new Conexion();
         cn = conexion.conexion();
         
