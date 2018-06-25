@@ -427,14 +427,6 @@ public final class MiFormulario extends javax.swing.JFrame {
         System.out.println(sucursal+" "+comida);
        // System.out.println(gestion.toString());
 
-        //System.out.println(gestion.toString());
-<<<<<<< HEAD
-        //int pos = jTableListadoComidas.getSelectedColumn();
-        //System.out.println(jTableListadoComidas.getModel());
-=======
-        int pos = jTableListadoComidas.getSelectedColumn();
-        System.out.println(jTableListadoComidas.getModel());
->>>>>>> fdc079f27c7f7c6bdaf2c45573d9a0ce00914698
 
     }//GEN-LAST:event_jButtonComidaMayorMontoActionPerformed
 
