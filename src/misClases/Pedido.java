@@ -34,6 +34,10 @@ public class Pedido extends Object {
         }
     }
 
+    public void setMontoR(double montoR) {
+        this.montoR = montoR;
+    }
+
     public ListaLEG getLista() {
         return lista;
     }

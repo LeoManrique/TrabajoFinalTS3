@@ -42,23 +42,25 @@ public class ListaLEG<E extends Comida> {
         talla++;
     }
 
-    public void eliminarDato(E x){
+    public void eliminarDato(String nombre){
         NodoLEG<E> aux = primero, ant = null;
         
-        while (aux != null && aux.getDato().equals(x)){
+        while (aux!=null && !aux.getDato().getNombre().equals(nombre)){
             ant = aux;
             aux = aux.getSiguiente();
         }
-        
+
         if (aux != null){
-            talla--;
-            if (aux == null){
+            talla --;
+            if (ant == null){
                 primero = primero.getSiguiente();
             } else {
                 ant.setSiguiente(aux.getSiguiente());
             }
-        }
+        
     }
+    }
+    
     
     public void eliminarDatoAleatorio(){
         Random randito = new Random();
@@ -67,7 +69,7 @@ public class ListaLEG<E extends Comida> {
         NodoLEG<E> nodo = primero;
         while (nodo != null){
             if (contador == indice){
-                eliminarDato(nodo.getDato());
+                eliminarDato(nodo.getDato().getNombre());
                 break;
             } else {
                 nodo = nodo.getSiguiente();
@@ -134,6 +136,7 @@ public class ListaLEG<E extends Comida> {
             }
             nodo = nodo.getSiguiente();
         }
+        
         return comida_maxima;
     }
     

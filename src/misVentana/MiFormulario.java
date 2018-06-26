@@ -8,8 +8,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import miCola.ArrayCola;
 import miConexion.Conexion;
 import miLista.ListaLEG;
+import miLista.NodoLEG;
 import misClases.Comida;
 import misClases.GestionPedidos;
 import misClases.Pedido;
@@ -36,11 +38,35 @@ public final class MiFormulario extends javax.swing.JFrame {
         
         setLocationRelativeTo(this);
         gestion = new GestionPedidos();
-        CargarPedidos();
+        CargarPedidosbkp();
         //System.out.println(gestion.toString());
         
     }
     public void CargarPedidos(){
+        String []cabeceraP={"Sucursal","Monto Recaudado"};
+        registrosP=new String[2];
+        ArrayCola cola = gestion.getCola();
+        modeloPedidos = new DefaultTableModel(null, cabeceraP);
+        
+        ArrayCola<Pedido> colaAux = new ArrayCola<>(); 
+        Pedido ped;
+        while (!cola.colaVacia()){
+            ped = cola.frentec();
+            cola.desencolar();
+            colaAux.encolar(ped);
+            registrosP = new String[2];
+            registrosP[0]=String.valueOf(ped.getSucursal());
+            registrosP[1]=String.valueOf(ped.getMontoR());
+            modeloPedidos.addRow(registrosP);          
+        }
+        while (!colaAux.colaVacia()){
+            ped = colaAux.frentec();
+            colaAux.desencolar();
+            cola.encolar(ped);
+        }
+        jTableListadoPedidos.setModel(modeloPedidos);   
+    }
+    public void CargarPedidosbkp(){
         String []cabeceraP={"Sucursal","Monto Recaudado"};
         registrosP=new String[2];
         
@@ -56,16 +82,49 @@ public final class MiFormulario extends javax.swing.JFrame {
                 registrosP[1]=rs.getString("montor");
                 modeloPedidos.addRow(registrosP);
                 Pedido pedido = new Pedido(Integer.parseInt(registrosP[0]));
-                pedido.calcularMontoR();
+                pedido.setMontoR(Double.parseDouble(registrosP[1]));
                 gestion.encolarPedido(pedido);
             }
-            CargarComidas();
+            CargarComidasbkp();
             jTableListadoPedidos.setModel(modeloPedidos);           
         } catch (SQLException e) {
             System.out.println("Error ...."+e.getMessage());       
         }         
     }
     public void CargarComidas(){
+        String []cabeceraC={"Sucursal","Comida","Cantidad","PrecioU"};        
+        registrosC=new String[4];
+        ArrayCola cola = gestion.getCola();
+        modeloComidas = new DefaultTableModel(null, cabeceraC);
+        
+        ArrayCola<Pedido> colaAux = new ArrayCola<>(); 
+        Pedido ped;
+        while (!cola.colaVacia()){
+            ped = cola.frentec();
+            cola.desencolar();
+            colaAux.encolar(ped);
+            ListaLEG<Comida> lista = ped.getLista();
+            NodoLEG<Comida> primero = lista.getPrimero();
+            
+            for (NodoLEG<Comida> aux = primero; aux != null; aux = aux.getSiguiente()){
+                registrosC[0] = String.valueOf(ped.getSucursal());
+                registrosC[1] = aux.getDato().getNombre();
+                registrosC[2] = String.valueOf(aux.getDato().getCantidad());
+                registrosC[3] = String.valueOf(aux.getDato().getPrecio());
+                modeloComidas.addRow(registrosC);
+            }
+        }
+        while (!colaAux.colaVacia()){
+            ped = colaAux.frentec();
+            colaAux.desencolar();
+            cola.encolar(ped);
+        }
+
+        jTableListadoComidas.setModel(modeloComidas);           
+             
+    }
+    
+    public void CargarComidasbkp(){
         String []cabeceraC={"Sucursal","Comida","Cantidad","PrecioU"};        
         registrosC=new String[4];
         
@@ -244,6 +303,11 @@ public final class MiFormulario extends javax.swing.JFrame {
         });
 
         jButtonEliminarCAleatoria.setText("Eliminar Comida Aleatoria");
+        jButtonEliminarCAleatoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarCAleatoriaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -409,17 +473,34 @@ public final class MiFormulario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonComidaMayorMontoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonComidaMayorMontoActionPerformed
-
+        ArrayCola cola = gestion.getCola();
         
-       //System.out.println(gestion.getPedido(SUCURSAL)getLista().getComidaMayorMonto().getNombre());
-       // int pos = jTableListadoComidas.getSelectedColumn();
-       //System.out.println(jTableListadoComidas.getModel());
-
-        // TODO add your handling code here:
+        ArrayCola<Pedido> colaAux = new ArrayCola<>(); 
+        Pedido ped;
+        String comidamax = "";
+        double preciomax = 0;
         
-       // System.out.println(gestion.toString());
-
-
+        while (!cola.colaVacia()){
+            ped = cola.frentec();
+            cola.desencolar();
+            colaAux.encolar(ped);
+            if (ped.getLista().getTalla() > 0){
+                Comida comida = ped.getLista().getComidaMayorMonto();
+                double precio = comida.getPrecio();
+                if (precio > preciomax){
+                    comidamax = comida.getNombre();
+                    preciomax = comida.getPrecio();
+                }
+            }
+            
+        }
+        while (!colaAux.colaVacia()){
+            ped = colaAux.frentec();
+            colaAux.desencolar();
+            cola.encolar(ped);
+        }
+        JOptionPane.showMessageDialog(null, "La comida con mayor monto es: "+comidamax);
+        System.out.println(gestion.toString());
 
     }//GEN-LAST:event_jButtonComidaMayorMontoActionPerformed
 
@@ -434,9 +515,8 @@ public final class MiFormulario extends javax.swing.JFrame {
     private void jButtonAgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarPedidoActionPerformed
              
        Pedido pedido = new Pedido(Integer.parseInt(jTextFieldSucursalPedido.getText()));
-       
-       if(!gestion.validarRepetido(pedido.getSucursal())){       
-            try {
+        try {
+            if(!gestion.validarRepetido(pedido.getSucursal())){    
                 gestion.encolarPedido(pedido);
                 sql="insert into pedidos (sucursal,montor) Values (?,0)";
                 PreparedStatement pst = cn.prepareStatement(sql);
@@ -444,25 +524,24 @@ public final class MiFormulario extends javax.swing.JFrame {
 
                 int n = pst.executeUpdate();
                 if(n!=0){
-                    JOptionPane.showMessageDialog(this, "Cargando Sucursal ...");
+                    //JOptionPane.showMessageDialog(this, "Cargando Sucursal ...");
                 }
-                CargarPedidos();   
-            } catch (SQLException e) {
-                System.out.println("Error encontrado  "+e.getMessage());
+            }else{
+               JOptionPane.showMessageDialog(null,"La sucursal "+pedido.getSucursal()+" ya ha sido registrada . . .");
             }
-        }else{
-           JOptionPane.showMessageDialog(null,"La sucursal "+pedido.getSucursal()+" ya ha sido registrada . . .");
-        }
+            CargarPedidos();
+            } catch (SQLException e) {
+                System.out.println("Error encontrado  "+e.getMessage());}
+       
     }//GEN-LAST:event_jButtonAgregarPedidoActionPerformed
 
     private void jButtonAgregarComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAgregarComidaActionPerformed
-           
        int suc = Integer.parseInt(jTextFieldSucursalComida.getText());       
        String nom = jTextFieldNombreComida.getText();
        int cant = Integer.parseInt(jTextFieldCantidad.getText());
        double precio = Double.parseDouble(jTextFieldPrecio.getText());
        
-       sql="insert into comida (sucursal,nombre,cantidad,precio) Values (?,?,?,?)";
+        sql="insert into comida (sucursal,nombre,cantidad,precio) Values (?,?,?,?)";
         try {
             PreparedStatement pst = cn.prepareStatement(sql);
             pst.setInt(1, suc);
@@ -474,29 +553,38 @@ public final class MiFormulario extends javax.swing.JFrame {
         } catch (SQLException e) {
             System.out.println("Error encontrado  "+e.getMessage());
         }
+       
+       Comida comida = new Comida(nom, cant, precio);
+       
+       gestion.getPedido(suc).getLista().agregarNuevaComida(comida);
+       gestion.getPedido(suc).calcularMontoR();
+       
+       CargarPedidos();
+       CargarComidas();
     }//GEN-LAST:event_jButtonAgregarComidaActionPerformed
 
     private void jButtonEliminarComidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarComidaActionPerformed
 
         int pos = jTableListadoComidas.getSelectedRow();        
-        int suc = Integer.parseInt(modeloComidas.getValueAt(pos, 0).toString());
-        String comi = modeloComidas.getValueAt(pos, 1).toString();
-        int cant = Integer.parseInt(modeloComidas.getValueAt(pos, 2).toString());
-        double prec = Double.parseDouble(modeloComidas.getValueAt(pos, 3).toString());
+        int suc = Integer.parseInt(String.valueOf(modeloComidas.getValueAt(pos, 0)));
+        String comi = String.valueOf(modeloComidas.getValueAt(pos, 1));
+        //int cant = Integer.parseInt(String.valueOf(modeloComidas.getValueAt(pos, 2)));
+        //double prec = Double.parseDouble(String.valueOf(modeloComidas.getValueAt(pos, 3)));
               
-        sql="DELETE FROM comida WHERE nombre = ? AND precio = ? AND cantidad = ? AND sucursal = ?";                
+        sql="DELETE FROM comida WHERE nombre = ? AND sucursal = ?";                
         
         try{             
             PreparedStatement pst = cn.prepareStatement(sql);             
             pst.setString(1, comi);
-            pst.setDouble(2, prec);
-            pst.setInt(3, cant);
-            pst.setInt(4, suc);            
+            pst.setInt(2, suc);            
             pst.executeUpdate();
+            gestion.getPedido(suc).getLista().eliminarDato(comi);
+            gestion.getPedido(suc).calcularMontoR();
         } catch (SQLException e) {
             System.out.println("Error encontrado  "+e.getMessage());
         }
         //ELIMINA LA FILA DE LA TABLA
+        CargarPedidos();
         if(pos>=0){
             modeloComidas.removeRow(pos);
         }else{
@@ -508,6 +596,34 @@ public final class MiFormulario extends javax.swing.JFrame {
             total+=amount;
         }
     }//GEN-LAST:event_jButtonEliminarComidaActionPerformed
+
+    private void jButtonEliminarCAleatoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarCAleatoriaActionPerformed
+        int pos = jTableListadoPedidos.getSelectedRow();        
+        int suc = Integer.parseInt(String.valueOf(modeloPedidos.getValueAt(pos, 0)));
+        //String comi = String.valueOf(modeloComidas.getValueAt(pos, 1));
+        //int cant = Integer.parseInt(String.valueOf(modeloComidas.getValueAt(pos, 2)));
+        //double prec = Double.parseDouble(String.valueOf(modeloComidas.getValueAt(pos, 3)));
+
+        try{             
+            gestion.getPedido(suc).getLista().eliminarDatoAleatorio();
+            gestion.getPedido(suc).calcularMontoR();
+        } catch (Exception e) {
+            System.out.println("Error encontrado  "+e.getMessage());
+        }
+        //ELIMINA LA FILA DE LA TABLA
+        CargarComidas(); 
+        CargarPedidos();       
+        /*if(pos>=0){
+            //modeloComidas.removeRow(pos);
+        }else{
+            JOptionPane.showMessageDialog(null,"No se puede eliminar ..");
+        }
+        double total = 0;
+        for (int j = 0; j < modeloComidas.getRowCount(); j++) {
+            int amount = Integer.parseInt((String) jTableListadoComidas.getValueAt(j, 3));
+            total+=amount;
+        }*/
+    }//GEN-LAST:event_jButtonEliminarCAleatoriaActionPerformed
     
     public static void main(String args[]) {
         try {
